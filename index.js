@@ -1,13 +1,34 @@
 require('dotenv').config()
+const mongoose = require('mongoose')
 const express = require('express') 
+
+
 const app = express()
-const port = 3000
+const userRoutes = require('./Routes/UserRoutes')
+const RoomRoutes = require("./Routes/RoomRoutes")
+const checkInRoutes = require("./Routes/CheckInRoutes");
 
 
-app.get('/room', (req, res) =>{
-    res.send('hello')
-})
 
-app.listen(process.env.PORT, () => {
+app.use(express.json())
+
+async function main() {
+    try {
+        await mongoose.connect(process.env.MONGO_URI)
+        console.log("✅ MongoDB Atlas Connected")
+    } catch (err) {
+        console.error("❌ MongoDB Error:", err)
+    }
+}
+main()
+
+
+app.use("/api/user", userRoutes);
+app.use("/api/Room", RoomRoutes)
+app.use("/api/checkin", checkInRoutes);
+
+const PORT = process.env.PORT || 8000
+
+app.listen(PORT, () => {
     console.log("server is running")
 })
