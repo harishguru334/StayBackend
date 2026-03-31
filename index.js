@@ -1,6 +1,8 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express') 
+const cors = require("cors");
+
 
 
 const app = express()
@@ -9,7 +11,7 @@ const RoomRoutes = require("./Routes/RoomRoutes")
 const checkInRoutes = require("./Routes/CheckInRoutes");
 
 
-
+app.use(cors()); // 🔥 IMPORTANT
 app.use(express.json())
 
 async function main() {
