@@ -6,9 +6,9 @@ const cors = require("cors");
 
 
 const app = express()
-const userRoutes = require('./Routes/UserRoutes')
-const RoomRoutes = require("./Routes/RoomRoutes")
-const checkInRoutes = require("./Routes/CheckInRoutes");
+const userRoutes = require('./routes/userRoutes')
+const RoomRoutes = require("./routes/RoomRoutes")
+const checkInRoutes = require("./routes/checkInRoutes");
 
 
 app.use(cors()); // 🔥 IMPORTANT
@@ -26,8 +26,9 @@ main()
 
 
 app.use("/api/user", userRoutes);
-app.use("/api/Room", RoomRoutes)
+app.use("/api/Room", RoomRoutes);
 app.use("/api/checkin", checkInRoutes);
+
 
 const PORT = process.env.PORT || 8000
 
